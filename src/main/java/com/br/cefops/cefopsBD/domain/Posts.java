@@ -3,6 +3,8 @@ package com.br.cefops.cefopsBD.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Column;
+
 
 @Entity
 public class Posts {
@@ -28,6 +30,7 @@ public class Posts {
 	}
 	String title;
 	@Lob
+	@Column(columnDefinition="LONGTEXT")
 	String poste;
 	
 }
