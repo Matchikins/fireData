@@ -39,10 +39,9 @@ public class PostResouce {
 	}
 	
 
-	
 	@ResponseBody
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public ResponseEntity<?> novoAluno(@RequestBody Posts post) {
+	public ResponseEntity<?> novoPost(@RequestBody Posts post) {
 		Optional<Posts> optposts = postsinterface.findById(post.getId());
 		if (optposts.isPresent())
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("");
@@ -50,18 +49,22 @@ public class PostResouce {
 		return ResponseEntity.status(HttpStatus.CREATED).body(post);
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "/post/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> alterarPost(@PathVariable Integer id, @RequestBody Posts post) {
-		Optional<Posts> optposts = postsinterface.findById(id);
-		if (!optposts.isPresent())
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
+	public ResponseEntity<?> alterarpost(@PathVariable Integer id, @RequestBody Posts postNovo) {
+		Optional<Posts> optPost = postsinterface.findById(id);
+		if (!optPost.isPresent())
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Não encontrado");
 
-		Posts PostCorrent = optposts.get();
+		Posts postCorrente = optPost.get();
+			postCorrente.setTitle(postNovo.getTitle());
+			postCorrente.setPoste(postNovo.getPoste());
 		
-		postsinterface.save(PostCorrent);
-		return ResponseEntity.status(HttpStatus.OK).body(PostCorrent);
+		postsinterface.save(postCorrente);
+		return ResponseEntity.status(HttpStatus.OK).body(postCorrente);
 	}
+
 	
 	
 
