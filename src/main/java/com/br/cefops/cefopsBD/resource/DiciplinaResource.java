@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.br.cefops.cefopsBD.domain.Disciplinas;
+import com.br.cefops.cefopsBD.domain.Professor;
 import com.br.cefops.cefopsBD.repository.DiciplinaInterface;
 
 @RestController
@@ -36,6 +37,16 @@ public class DiciplinaResource {
 	public ResponseEntity<?> obterdiciplinas() {
 		List<Disciplinas> diciplinas = diciplinainterface.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(diciplinas);
+	}
+	
+	@RequestMapping(value = "/diciplinas/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> eliminarprofessorsRa(@PathVariable Integer id) {
+		Optional<Disciplinas> optdiciplinas = diciplinainterface.findById(id);
+		if (!optdiciplinas.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+		}
+		diciplinainterface.deleteById(id);
+		return ResponseEntity.status(HttpStatus.OK).body(optdiciplinas.get());
 	}
 
 }
