@@ -9,14 +9,14 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames={"cpf"})})
+
 
 public class Alunos {
-
+	@Id
 	Integer Id;
 	String Name;
 	String LastName;
-	@Id
+
 	String  Cpf;
 	public String getCpf() {
 		return Cpf;
