@@ -42,16 +42,8 @@ public class Alunos {
 
 
 	
-	@ManyToOne
-	 @JoinColumn(name="curso_id")
-	private Curso curso;
+
 	
-	public Curso getCurso() {
-		return curso;
-	}
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
 	public Integer getId() {
 		return Id;
 	}
