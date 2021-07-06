@@ -4,6 +4,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Curso {
+	
 	@Id
 	Integer Id;
 	String Name;

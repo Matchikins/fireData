@@ -1,21 +1,49 @@
 package com.br.cefops.cefopsBD.domain;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"cpf"})})
+
 public class Alunos {
-	@Id
+
 	Integer Id;
 	String Name;
 	String LastName;
-	long  Cpf;
+	@Id
+	String  Cpf;
+	public String getCpf() {
+		return Cpf;
+	}
+	public void setCpf(String cpf) {
+		Cpf = cpf;
+	}
+
+
+
 	String Email;
-	Integer Grupe;
-	Integer CourseId;
-	Integer teacherID;
+	
+	@Column(name = "foto_usuario", nullable = true, columnDefinition="varchar(200) default 'https://media.istockphoto.com/photos/astronaut-lying-in-the-meadow-picture-id1304263738?s=612x612'")
+	String photo;
+	
+
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+
 	
 	@ManyToOne
+	 @JoinColumn(name="curso_id")
 	private Curso curso;
 	
 	public Curso getCurso() {
@@ -42,35 +70,14 @@ public class Alunos {
 	public void setLastName(String lastName) {
 		LastName = lastName;
 	}
-	public double getCpf() {
-		return Cpf;
-	}
-	public void setCpf(Integer cpf) {
-		Cpf = cpf;
-	}
+	
 	public String getEmail() {
 		return Email;
 	}
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public Integer getGrupe() {
-		return Grupe;
-	}
-	public void setGrupe(Integer grupe) {
-		Grupe = grupe;
-	}
-	public Integer getCourseId() {
-		return CourseId;
-	}
-	public void setCourseId(Integer courseId) {
-		CourseId = courseId;
-	}
-	public Integer getTeacherID() {
-		return teacherID;
-	}
-	public void setTeacherID(Integer teacherID) {
-		this.teacherID = teacherID;
-	}
+
+
 
 }
